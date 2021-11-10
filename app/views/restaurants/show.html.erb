@@ -1,12 +1,19 @@
-<h1><%= @restaurant.name %></h1>
-<%= @restaurant.category %>
-<%= @restaurant.address %>
-<% if @restaurant.reviews.any? %>
-  <% @restaurant.reviews.each do |review| %>
-    <%= review.rating %>
-    <%= review.content %>
-    <%= link_to "+ADD REVIEW", new_restaurant_review_path(@restaurant) %>
-  <% end %>
-  <% else %>
-  <%= link_to "+ADD REVIEW", new_restaurant_review_path(@restaurant) %>
-<% end %>
+<div class="container">
+  <div class="card-product">
+    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+    <div class="card-product-infos">
+      <h2>Name: <%= @restaurant.name %></h2>
+      <h2>Cuisine: <%= @restaurant.category %></h2>
+    </div>
+  <span><%= link_to "ADD REVIEW", new_restaurant_review_path(@restaurant), class: "btn btn-flat" %></span>
+  </div>
+      <% @restaurant.reviews.each do |review| %>
+        <% review.rating.times do %>
+        <i class="fas fa-grin-stars"></i>
+        <% end %>
+        <% (5 - review.rating).times do %>
+        <i class="far fa-grin-stars"></i>
+        <% end %>
+        <p><%= review.content %><p>
+      <% end %>
+</div>
